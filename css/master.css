@@ -46,19 +46,6 @@ nav {
 	justify-content: space-between;
 }
 
-.item:nth-child(1) {
-	height: 50%;
-}
-
-.item:nth-child(2) {
-	height: 30%;
-}
-
-.item:nth-child(3) {
-	height: 20%;
-}
-
-
 /* Floating purchase button */
 
 .new_purchase {
