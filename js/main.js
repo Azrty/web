@@ -33,8 +33,8 @@ var get = (url, cb) => {
 var app = new Vue({
 	el: '#app',
 	template: `
-		<div class="container" v-if="connected">
-			<div class="center">
+		<div class="center" v-if="connected">
+			<div class="graph">
 				<div id="marie" class="item">
 					<div>
 						{{ marieAmount }}
@@ -66,18 +66,29 @@ var app = new Vue({
 				</svg>
 			</div>
 		</div>
-		<div class="container" v-else>
-			<div class="center">
-				<input type="text" id="username">
-				<input type="password" id="password">
+		<div class="center" v-else>
+			<div class="signin">
+				<input type="text" id="username"><br>
+				<input type="password" id="password"><br>
 				<button id="submit" @click="signin">Signin</button>
 			</div>
 		</div>
 	`,
 	data: {
-		marieAmount: 0,
-		alexAmount: 0,
-		jimiAmount: 0,
+		users: [
+			{
+				username: "Marie",
+				amount: 0
+			},
+			{
+				username: "Alex",
+				amount: 0
+			},
+			{
+				username: "Jimi",
+				amount: 0
+			}
+		],
 		connected: false
 	},
 	created: function() {
@@ -114,7 +125,7 @@ var app = new Vue({
 			var username = document.querySelector("#username").value
 			var password = document.querySelector("#password").value
 
-			
+
 		},
 		newPurchase: function() {
 			console.log("new purchase")
