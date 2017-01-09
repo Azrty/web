@@ -8,18 +8,18 @@ var get = (url, cb) => {
 	request.open('GET', url, true)
 	
 	request.onload = () => {
-	  if (request.status >= 200 && request.status < 400) {
-		  try {
-			  var res = JSON.parse(request.responseText)
-			  cb(null, res)
-		  } catch (e) {
-			  cb('No JSON', null)
-		  }
-	  }
-	  else if(request.status == 401)
-	  	cb('Not connected', null)
-	  else
-		cb('Wrong server response', null)
+		if (request.status >= 200 && request.status < 400) {
+			// try {
+				var res = JSON.parse(request.responseText)
+				cb(null, res)
+			// } catch (e) {
+			// 	cb('No JSON', null)
+			// }
+		}
+		else if(request.status == 401)
+			cb('Not connected', null)
+		else
+			cb('Wrong server response', null)
 	}
 
 	request.onerror = () => {
@@ -35,28 +35,12 @@ var app = new Vue({
 	template: `
 		<div class="center" v-if="connected">
 			<div class="graph">
-				<div id="marie" class="item">
+				<div :id="user.username" class="item" v-for="user in users">
 					<div>
-						{{ marieAmount }}
+						{{ user.amount }}
 					</div>
 					<div>
-						Marie
-					</div>
-				</div>
-				<div id="alex" class="item">
-					<div>
-						{{ alexAmount }}
-					</div>
-					<div>
-						Alex
-					</div>
-				</div>
-				<div id="jimi" class="item">
-					<div>
-						{{ jimiAmount }}
-					</div>
-					<div>
-						Jimi
+						{{ user.username }}
 					</div>
 				</div>
 			</div>
@@ -95,7 +79,7 @@ var app = new Vue({
 		var token = localStorage.getItem('token')
 
 		if (token)
-			this.connected = true
+			this.connected = false
 	},
 	mounted: function() {
 		if (this.connected) {
@@ -105,17 +89,19 @@ var app = new Vue({
 
 				var total = 0
 				data.purchases.forEach((purchase) => {
-					if (purchase.username === "Marie")
-						this.marieAmount += purchase.amount
-					if (purchase.username === "Alex")
-						this.alexAmount += purchase.amount
-					if (purchase.username === "Jimi")
-						this.jimiAmount += purchase.amount
-					total += purchase.amount
+					var index = this.users.map(user => user.username).indexOf(purchase.username)
+					if (index != -1) {
+						this.users[index].amount += purchase.amount
+						total += purchase.amount
+					}
 				})
-				document.querySelector("#marie").style.height = this.marieAmount * 100 / total + '%'
-				document.querySelector("#alex").style.height = this.alexAmount * 100 / total + '%'
-				document.querySelector("#jimi").style.height = this.jimiAmount * 100 / total + '%'
+				this.users.forEach((user) => {
+					index = this.users.map(user => user.username).indexOf(user.username)
+					if (index != -1) {
+						var height = this.users[index].amount * 100 / total
+						document.querySelector("#" + user.username).style.height = height + '%'
+					}
+				})
 			})
 		}
 		
