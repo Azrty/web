@@ -106,11 +106,11 @@ var app = new Vue({
 		var token = localStorage.getItem('token')
 
 		if (token)
-			this.connected = false
+			this.connected = true
 	},
 	mounted: function() {
 		if (this.connected) {
-			get('http://localhost:3000/purchases', (err, data) => {
+			get('https://api.sillypixel.fr/coloc/purchases', (err, data) => {
 				if (err)
 					return console.log(err)
 
