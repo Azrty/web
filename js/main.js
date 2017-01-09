@@ -30,6 +30,33 @@ var get = (url, cb) => {
 	request.send()
 }
 
+var post = (url, obj, cb) => {
+	var request = new XMLHttpRequest()
+	request.open('POST', url, true)
+
+	request.onload = () => {
+		if (request.status >= 200 && request.status < 400) {
+			try {
+				var res = JSON.parse(request.responseText)
+				cb(null, res)
+			} catch (e) {
+				cb('No JSON', null)
+			}
+		}
+		else if(request.status == 401)
+			cb('Not connected', null)
+		else
+			cb('Wrong server response', null)
+	}
+
+	request.onerror = () => {
+		cb('Error', null)
+	}
+
+	request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+	request.send(obj)
+}
+
 var app = new Vue({
 	el: '#app',
 	template: `
@@ -108,10 +135,15 @@ var app = new Vue({
 	},
 	methods: {
 		signin: function() {
-			var username = document.querySelector("#username").value
-			var password = document.querySelector("#password").value
+			post('https://api.sillypixel.fr/signin', {
+				username: document.querySelector("#username").value,
+				password: document.querySelector("#password").value
+			}, (err, data) => {
+				if (err)
+					return console.log(err)
 
-
+				console.log(data)
+			})
 		},
 		newPurchase: function() {
 			console.log("new purchase")

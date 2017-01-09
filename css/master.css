@@ -5,17 +5,20 @@ html, body {
 	height: 100vh;
 	background: #2c3e50;
 	color: #333;
+	font-family: 'bebas_neuebold', sans-serif;
 }
 
 input {
 	outline: 0px;
-	width: 100%;
+	width: calc(100% - 10px);
 	padding: 5px;
 	border-radius: 5px;
 	border: none;
 	background: #fff;
 	font-size: 25px;
 	margin-bottom: 10px;
+	font-family: 'bebas_neuebold', sans-serif;
+	text-align: center;
 }
 
 nav {
@@ -23,7 +26,6 @@ nav {
 	height: 50px;
 	width: 100%;
 	color: #2c3e50;
-	font-family: 'bebas_neuebold', sans-serif;
 	font-size: 25px;
 	display: flex;
 }
@@ -51,7 +53,6 @@ nav {
 	width: 100px;
 	text-align: center;
 	color: #2c3e50;
-	font-family: 'bebas_neuebold', sans-serif;
 	font-size: 25px;
 	display: flex;
 	flex-direction: column;
@@ -74,6 +75,8 @@ nav {
 }
 
 .signin button {
+	font-family: 'bebas_neuebold', sans-serif;
+	cursor: pointer;
 	border: 1px solid #fff;
 	background: #fff;
 	outline: 0px;
