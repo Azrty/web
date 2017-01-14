@@ -1,67 +1,8 @@
-var get = (url, cb) => {
-	var token = localStorage.getItem('token')
-
-	if (!token)
-		return cb('Not connected', null)
-
-	var request = new XMLHttpRequest()
-	request.open('GET', url, true)
-	
-	request.onload = () => {
-		if (request.status >= 200 && request.status < 400) {
-			// try {
-				var res = JSON.parse(request.responseText)
-				cb(null, res)
-			// } catch (e) {
-			// 	cb('No JSON', null)
-			// }
-		}
-		else if(request.status == 401)
-			cb('Not connected', null)
-		else
-			cb('Wrong server response', null)
-	}
-
-	request.onerror = () => {
-		cb('Error', null)
-	}
-
-	request.setRequestHeader("Authorization", "Bearer " + token)
-	request.send()
-}
-
-var post = (url, obj, cb) => {
-	var request = new XMLHttpRequest()
-	request.open('POST', url, true)
-
-	request.onload = () => {
-		if (request.status >= 200 && request.status < 400) {
-			try {
-				var res = JSON.parse(request.responseText)
-				cb(null, res)
-			} catch (e) {
-				cb('No JSON', null)
-			}
-		}
-		else if(request.status == 401)
-			cb('Not connected', null)
-		else
-			cb('Wrong server response', null)
-	}
-
-	request.onerror = () => {
-		cb('Error', null)
-	}
-
-	request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-	request.send(obj)
-}
-
 var app = new Vue({
 	el: '#app',
 	template: `
 		<div class="center" v-if="connected">
-			<div class="graph">
+			<div class="graph" v-if="!new_purchase">
 				<div :id="user.username" class="item" v-for="user in users">
 					<div>
 						{{ user.amount }}
@@ -71,17 +12,39 @@ var app = new Vue({
 					</div>
 				</div>
 			</div>
-			<div class="new_purchase" @click="newPurchase">
+			<div class="new_purchase" v-else>
+				<div class="new_purchase">
+					<input placeholder="Shop" list="shops" id="shop">
+					<datalist id="shops">
+						<option value="Super U">
+						<option value="Tang Frères">
+						<option value="Monoprix">
+						<option value="Carrefour">
+						<option value="Leclerc">
+						<option value="Lidl">
+					</datalist>
+					<input placeholder="Price" type="number" id="amount"><br>
+					<textarea placeholder="Description" id="description"></textarea><br>
+					<button @click="addPurchase">Add purchase</button>
+				</div>
+			</div>
+			<div class="new_purchase_button" @click="newPurchase" v-if="!new_purchase">
 				<svg viewBox="0 0 24 24">
 				    <path fill="#2c3e50" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+				</svg>
+			</div>
+			<div class="new_purchase_button" @click="newPurchase" v-else>
+				<svg viewBox="0 0 24 24">
+				    <path fill="#2c3e50" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
 				</svg>
 			</div>
 		</div>
 		<div class="center" v-else>
 			<div class="signin">
-				<input type="text" id="username"><br>
-				<input type="password" id="password"><br>
-				<button id="submit" @click="signin">Signin</button>
+				<span>{{ error }}</span>
+				<input type="text" placeholder="Username" id="username"><br>
+				<input type="password" placeholder="Password" id="password"><br>
+				<button @click="signin">Signin</button>
 			</div>
 		</div>
 	`,
@@ -100,7 +63,9 @@ var app = new Vue({
 				amount: 0
 			}
 		],
-		connected: false
+		connected: false,
+		new_purchase: false,
+		error: ""
 	},
 	created: function() {
 		var token = localStorage.getItem('token')
@@ -110,7 +75,7 @@ var app = new Vue({
 	},
 	mounted: function() {
 		if (this.connected) {
-			get('https://api.sillypixel.fr/coloc/purchases', (err, data) => {
+			M.get('https://api.sillypixel.fr/coloc/purchases', (err, data) => {
 				if (err)
 					return console.log(err)
 
@@ -124,29 +89,54 @@ var app = new Vue({
 				})
 				this.users.forEach((user) => {
 					index = this.users.map(user => user.username).indexOf(user.username)
-					if (index != -1) {
+					if (index != -1 && document.querySelector("#" + user.username)) {
 						var height = this.users[index].amount * 100 / total
 						document.querySelector("#" + user.username).style.height = height + '%'
 					}
 				})
 			})
 		}
-		
 	},
 	methods: {
 		signin: function() {
-			post('https://api.sillypixel.fr/signin', {
+			M.post('https://api.sillypixel.fr/signin', {
 				username: document.querySelector("#username").value,
 				password: document.querySelector("#password").value
 			}, (err, data) => {
 				if (err)
 					return console.log(err)
 
-				console.log(data)
+				if (data.token) {
+					localStorage.setItem('token', data.token)
+					this.connected = true
+				}
+				else {
+					this.error = data.message
+					document.querySelector("#password").value = ''
+				}
 			})
 		},
 		newPurchase: function() {
-			console.log("new purchase")
+			if (this.new_purchase) {
+				this.new_purchase = false
+				this.mounted()
+			}
+			else
+				this.new_purchase = true
+		},
+		addPurchase: function() {
+			this.new_purchase = false
+
+			M.post('http://localhost:3002/purchases', {
+				shop: document.querySelector("#shop").value,
+				amount: document.querySelector("#amount").value,
+				description: document.querySelector("#description").value
+			}, (err, data) => {
+				if (err)
+					return console.log(err)
+
+				console.log(data)
+			})
 		}
 	}
 })
