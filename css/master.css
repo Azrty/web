@@ -41,6 +41,12 @@ nav {
 	color: #2c3e50;
 	font-size: 25px;
 	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+nav img {
+	width: 40px;
 }
 
 .center {

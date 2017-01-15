@@ -1,3 +1,32 @@
+var getPurchases = (self, cb) => {
+	M.get('https://api.sillypixel.fr/coloc/purchases', (err, data) => {
+		if (err)
+			return console.log(err)
+
+		var total = 0
+		var amounts = []
+		data.purchases.forEach((purchase) => {
+			var index = self.users.map(user => user.username).indexOf(purchase.username)
+			if (!amounts[index])
+				amounts[index] = 0
+			if (index != -1) {
+				amounts[index] += purchase.amount
+				total += purchase.amount
+			}
+		})
+		self.users.forEach((user) => {
+			index = self.users.map(user => user.username).indexOf(user.username)
+			if (index != -1 && document.querySelector("#" + user.username)) {
+				self.users[index].amount = amounts[index]
+				var height = self.users[index].amount * 100 / total
+				document.querySelector("#" + user.username).style.height = height + '%'
+			}
+		})
+		if (cb)
+			cb()
+	})
+}
+
 var app = new Vue({
 	el: '#app',
 	template: `
@@ -22,6 +51,7 @@ var app = new Vue({
 						<option value="Carrefour">
 						<option value="Leclerc">
 						<option value="Lidl">
+						<option value="Picard">
 					</datalist>
 					<input placeholder="Price" type="number" id="amount"><br>
 					<textarea placeholder="Description" id="description"></textarea><br>
@@ -43,7 +73,7 @@ var app = new Vue({
 			<div class="signin">
 				<span>{{ error }}</span>
 				<input type="text" placeholder="Username" id="username"><br>
-				<input type="password" placeholder="Password" id="password"><br>
+				<input type="password" placeholder="Password" id="password" @keyup.enter="signin"><br>
 				<button @click="signin">Signin</button>
 			</div>
 		</div>
@@ -75,26 +105,7 @@ var app = new Vue({
 	},
 	mounted: function() {
 		if (this.connected) {
-			M.get('https://api.sillypixel.fr/coloc/purchases', (err, data) => {
-				if (err)
-					return console.log(err)
-
-				var total = 0
-				data.purchases.forEach((purchase) => {
-					var index = this.users.map(user => user.username).indexOf(purchase.username)
-					if (index != -1) {
-						this.users[index].amount += purchase.amount
-						total += purchase.amount
-					}
-				})
-				this.users.forEach((user) => {
-					index = this.users.map(user => user.username).indexOf(user.username)
-					if (index != -1 && document.querySelector("#" + user.username)) {
-						var height = this.users[index].amount * 100 / total
-						document.querySelector("#" + user.username).style.height = height + '%'
-					}
-				})
-			})
+			getPurchases(this)
 		}
 	},
 	methods: {
@@ -108,7 +119,9 @@ var app = new Vue({
 
 				if (data.token) {
 					localStorage.setItem('token', data.token)
-					this.connected = true
+					getPurchases(this, () => {
+						this.connected = true
+					})
 				}
 				else {
 					this.error = data.message
@@ -119,7 +132,7 @@ var app = new Vue({
 		newPurchase: function() {
 			if (this.new_purchase) {
 				this.new_purchase = false
-				this.mounted()
+				getPurchases(this)
 			}
 			else
 				this.new_purchase = true
@@ -127,7 +140,7 @@ var app = new Vue({
 		addPurchase: function() {
 			this.new_purchase = false
 
-			M.post('http://localhost:3002/purchases', {
+			M.post('https://api.sillypixel.fr/coloc/purchases', {
 				shop: document.querySelector("#shop").value,
 				amount: document.querySelector("#amount").value,
 				description: document.querySelector("#description").value
@@ -135,7 +148,14 @@ var app = new Vue({
 				if (err)
 					return console.log(err)
 
-				console.log(data)
+				if (data.success) {
+					getPurchases(this, () => {
+						this.new_purchase = false
+					})
+				}
+				else {
+					console.log(data.message)
+				}
 			})
 		}
 	}
