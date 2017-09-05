@@ -18,7 +18,7 @@ class App extends React.Component {
 
   componentWillMount () {
     if (global.localStorage.getItem('token')) {
-      this.history.push('/basket');
+      this.props.history.push('/basket');
     }
   }
 
