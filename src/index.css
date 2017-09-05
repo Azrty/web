@@ -88,6 +88,31 @@ nav img {
 	opacity: 0.7;
 }
 
+.history {
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.purchase {
+    width: 300px;
+    margin: 10px;
+    background-color: #fff;
+    color: #2c3e50;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.purchase p {
+    margin: 0px;
+    padding: 0px;
+}
+
 .signin {
 	width: 300px;
 	text-align: center;
@@ -111,7 +136,7 @@ nav img {
 	text-align: center;
 }
 
-.new_purchase button {
+.new_purchase button, .history button {
 	font-family: 'bebas_neuebold', sans-serif;
 	cursor: pointer;
 	border: 1px solid #fff;
@@ -129,7 +154,31 @@ nav img {
 	cursor: pointer;
 	position: fixed;
 	bottom: 20px;
+	left: calc(50% - 20px);
+	background: #ecf0f1;
+	width: 30px;
+	height: 30px;
+	padding: 10px;
+	border-radius: 100%;
+}
+
+.history_button {
+    cursor: pointer;
+	position: fixed;
+	bottom: 20px;
 	right: 20px;
+	background: #ecf0f1;
+	width: 30px;
+	height: 30px;
+	padding: 10px;
+	border-radius: 100%;
+}
+
+.logout_button {
+    cursor: pointer;
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
 	background: #ecf0f1;
 	width: 30px;
 	height: 30px;
@@ -145,5 +194,4 @@ nav img {
          url('./fonts/bebasneue_bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
