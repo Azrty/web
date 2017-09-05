@@ -1,0 +1,21 @@
+{
+  "name": "web-coloc",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.2",
+    "custom-react-scripts": "0.2.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2"
+  },
+  "scripts": {
+    "start": "PORT=3050 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "semistandard": "^11.0.0"
+  }
+}
