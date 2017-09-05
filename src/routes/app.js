@@ -1,8 +1,10 @@
 import React from 'react';
+import { observable } from 'mobx-react';
 import logo from '../images/logo.svg';
 
 import axios from '../utils/axios.js';
 
+@observable
 class App extends React.Component {
   constructor (props) {
     super(props);
@@ -11,8 +13,8 @@ class App extends React.Component {
       newPurchase: false,
       shop: '',
       price: 0,
-      totalPrice: 0,
       description: '',
+      totalPrice: 0,
       shops: [],
       users: []
     };
