@@ -13,11 +13,12 @@ class History extends React.Component {
     super(props);
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount () {
     if (!global.localStorage.getItem('token')) {
-      this.props.history.push('/login');
+      this.props.history.push('/');
     } else {
       axios().get('/coloc/purchases')
       .then(res => {
@@ -28,11 +29,17 @@ class History extends React.Component {
         if (err.response) {
           if (err.response.status === 401) {
             global.localStorage.removeItem('token');
-            this.props.history.push('/login');
+            this.props.history.push('/');
           }
         }
       });
     }
+  }
+
+  handleLogout (event) {
+    event.preventDefault();
+    global.localStorage.removeItem('token');
+    this.props.history.push('/')
   }
 
   handleDelete (event) {

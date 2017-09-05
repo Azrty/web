@@ -27,7 +27,7 @@ class App extends React.Component {
 
   componentWillMount () {
     if (!global.localStorage.getItem('token')) {
-      this.props.history.push('/login');
+      this.props.history.push('/');
     } else {
       axios().get('/coloc/purchases')
       .then(res => {
@@ -38,7 +38,7 @@ class App extends React.Component {
         if (err.response) {
           if (err.response.status === 401) {
             global.localStorage.removeItem('token');
-            this.props.history.push('/login');
+            this.props.history.push('/');
           }
         }
       });
@@ -68,7 +68,7 @@ class App extends React.Component {
           if (err.response) {
             if (err.response.status === 401) {
               global.localStorage.removeItem('token');
-              this.props.history.push('/login');
+              this.props.history.push('/');
             }
           }
         });
@@ -90,7 +90,7 @@ class App extends React.Component {
   handleLogout (event) {
     event.preventDefault();
     global.localStorage.removeItem('token');
-    this.props.history.push('/login')
+    this.props.history.push('/')
   }
 
   render () {
