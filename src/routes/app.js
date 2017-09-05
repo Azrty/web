@@ -89,9 +89,7 @@ class App extends React.Component {
             <div className='new_purchase'>
               <input id='shop' placeholder='Shop' list='shops' onChange={this.handleChange} onKeyPress={this.handleConfirm} />
               <datalist id='shops'>
-                {
-                  Store.shops.map(elem => <option key={Math.random()} value={elem} />)
-                }
+                { Store.shops.map(elem => <option key={Math.random()} value={elem} />) }
               </datalist>
               <input id='price' type='number' placeholder='Price' onChange={this.handleChange} onKeyPress={this.handleConfirm} /><br />
               <textarea id='description' placeholder='Description' onChange={this.handleChange} onKeyPress={this.handleConfirm} /><br />
@@ -108,8 +106,7 @@ class App extends React.Component {
             <svg viewBox='0 0 24 24'>
               <path fill='#2c3e50' d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z' />
             </svg>
-          </div>
-          }
+          </div> }
         </div>
       </div>
     );
