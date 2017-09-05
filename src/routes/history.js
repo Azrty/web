@@ -54,6 +54,7 @@ class History extends React.Component {
             return (
               <div key={purchase._id} id={purchase._id} className='purchase'>
                 <p>{purchase.username}</p>
+                <p>{purchase.shop}</p>
                 <p>{purchase.amount.toFixed(2)}</p>
                 <p>{purchase.description}</p>
                 <p><Moment fromNow date={new Date(purchase.date)} /></p>
