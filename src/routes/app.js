@@ -59,10 +59,22 @@ class App extends React.Component {
         amount: this.state.price,
         description: this.state.description
       }).then(res => {
+        axios().get('/coloc/purchases')
+        .then(res => {
+          if (res.data.success === true) Store.setStore(res.data.purchases);
+        })
+        .catch(err => {
+          console.log(err);
+          if (err.response) {
+            if (err.response.status === 401) {
+              global.localStorage.removeItem('token');
+              this.props.history.push('/login');
+            }
+          }
+        });
         this.setState({
           newPurchase: false
         });
-        console.log(res);
       }).catch(err => {
         if (err.response) {
           console.log(err.response);

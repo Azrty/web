@@ -17,8 +17,8 @@ class App extends React.Component {
   }
 
   componentWillMount () {
-    if (!global.localStorage.getItem('token')) {
-      this.props.history.push('/login');
+    if (global.localStorage.getItem('token')) {
+      this.history.push('/basket');
     }
   }
 
@@ -36,7 +36,7 @@ class App extends React.Component {
         if (res.data.success === true) {
           if (res.data.token) {
             global.localStorage.setItem('token', res.data.token);
-            this.props.history.push('/');
+            this.props.history.push('/basket');
           }
         } else if (res.data.message) {
           this.setState({error: res.data.message});

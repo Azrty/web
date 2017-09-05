@@ -12,8 +12,8 @@ import './index.css';
 ReactDOM.render((
   <Router>
     <Switch>
-      <Route exact path='/' component={App} />
-      <Route exact path='/login' component={Auth} />
+      <Route exact path='/' component={Auth} />
+      <Route exact path='/basket' component={App} />
       <Route exact path='/history' component={History} />
     </Switch>
   </Router>

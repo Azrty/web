@@ -50,14 +50,20 @@ class History extends React.Component {
           </div>
         </nav>
         <div className='history'>
-          {Store.purchases.map((purchase, index) => {
-            console.log(purchase)
+          {Store.purchases.map(purchase => {
             return (
-              <div key={index} className='purchase'>
+              <div key={purchase._id} id={purchase._id} className='purchase'>
                 <p>{purchase.username}</p>
                 <p>{purchase.amount.toFixed(2)}</p>
                 <p>{purchase.description}</p>
                 <p><Moment fromNow date={new Date(purchase.date)} /></p>
+                <button onClick={() => {
+                  axios().delete(`/coloc/purchases/${purchase._id}`).then(res => {
+                    if (res.data.success === true) {
+                      Store.deleteItem(purchase._id)
+                    }
+                  }).catch(err => console.log(err.response))
+                }}>Delete</button>
               </div>
             );
           })}
@@ -82,7 +88,7 @@ class History extends React.Component {
             </g>    
           </svg>
         </div>
-        <div className='history_button' onClick={() => {this.props.history.push('/')}}>
+        <div className='history_button' onClick={() => {this.props.history.push('/basket')}}>
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             viewBox="0 0 500 500">
             <g fill='#2c3e50'>

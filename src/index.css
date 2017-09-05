@@ -136,7 +136,7 @@ nav img {
 	text-align: center;
 }
 
-.new_purchase button, .history button {
+.new_purchase button {
 	font-family: 'bebas_neuebold', sans-serif;
 	cursor: pointer;
 	border: 1px solid #fff;
