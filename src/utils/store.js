@@ -69,6 +69,9 @@ class Store {
           amount
         });
       }
+      if (this.shops.indexOf(elem.shop) === -1) {
+        this.shops.push(elem.shop);
+      }
     }, this);
   }
 }
