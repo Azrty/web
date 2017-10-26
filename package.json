@@ -20,6 +20,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "semistandard": "^11.0.0"
+    "nodemon": "^1.12.1",
+    "semistandard": "^11.0.0",
+    "standard": "^10.0.3"
   }
 }

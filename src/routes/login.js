@@ -1,30 +1,30 @@
-import React from 'react';
+import React from 'react'
 
-import axios from '../utils/axios';
+import axios from '../utils/axios'
 
 class App extends React.Component {
   constructor (props) {
-    super(props);
+    super(props)
 
     this.state = {
       error: '',
       username: '',
       password: ''
-    };
+    }
 
-    this.handleKey = this.handleKey.bind(this);
-    this.handleConfirm = this.handleConfirm.bind(this);
+    this.handleKey = this.handleKey.bind(this)
+    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
   componentWillMount () {
     if (global.localStorage.getItem('token')) {
-      this.props.history.push('/basket');
+      this.props.history.push('/basket')
     }
   }
 
   handleKey (event) {
-    event.preventDefault();
-    this.setState({[event.target.id]: event.target.value});
+    event.preventDefault()
+    this.setState({[event.target.id]: event.target.value})
   }
 
   handleConfirm (event) {
@@ -35,19 +35,19 @@ class App extends React.Component {
       }).then(res => {
         if (res.data.success === true) {
           if (res.data.token) {
-            global.localStorage.setItem('token', res.data.token);
-            this.props.history.push('/basket');
+            global.localStorage.setItem('token', res.data.token)
+            this.props.history.push('/basket')
           }
         } else if (res.data.message) {
-          this.setState({error: res.data.message});
+          this.setState({error: res.data.message})
         }
       }).catch(err => {
-        console.log(err);
+        console.log(err)
         if (err.response) {
-          console.log(err.response);
-          this.setState({error: err.response.data});
+          console.log(err.response)
+          this.setState({error: err.response.data})
         }
-      });
+      })
     }
   }
 
@@ -67,8 +67,8 @@ class App extends React.Component {
           <button name='Submit' onClick={this.handleConfirm}>Signin</button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
