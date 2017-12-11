@@ -1,74 +1,44 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import axios from '../utils/axios'
-
-class App extends React.Component {
+class Login extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      error: '',
-      username: '',
+      mail: '',
       password: ''
     }
-
-    this.handleKey = this.handleKey.bind(this)
-    this.handleConfirm = this.handleConfirm.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount () {
-    if (global.localStorage.getItem('token')) {
-      this.props.history.push('/basket')
-    }
+  handleChange (e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleKey (event) {
-    event.preventDefault()
-    this.setState({[event.target.id]: event.target.value})
-  }
-
-  handleConfirm (event) {
-    if (event.target.name === 'Submit' || event.key === 'Enter') {
-      axios().post('/signin', {
-        username: this.state.username,
-        password: this.state.password
-      }).then(res => {
-        if (res.data.success === true) {
-          if (res.data.token) {
-            global.localStorage.setItem('token', res.data.token)
-            this.props.history.push('/basket')
-          }
-        } else if (res.data.message) {
-          this.setState({error: res.data.message})
-        }
-      }).catch(err => {
-        console.log(err)
-        if (err.response) {
-          console.log(err.response)
-          this.setState({error: err.response.data})
-        }
-      })
-    }
+  handleSubmit (e) {
+    e.preventDefault()
+    console.log(this.state)
+    console.log('Form submited')
   }
 
   render () {
     return (
-      <div className='center'>
-        <div className='signin'>
-          {(this.state.err !== '')
-          ? <span>{this.state.error}</span>
-          : null}
-          <input id='username' type='text' placeholder='Username'
-            value={this.state.username} onChange={this.handleKey}
-            onKeyPress={this.handleConfirm} /><br />
-          <input id='password' type='password' placeholder='Password'
-            value={this.state.password} onChange={this.handleKey}
-            onKeyPress={this.handleConfirm} /><br />
-          <button name='Submit' onClick={this.handleConfirm}>Signin</button>
-        </div>
+      <div id='login'>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Mail:
+          <input type='text' name='mail' value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <label>
+            Password:
+          <input type='password' name='password' value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type='submit' value='Submit' />
+        </form>
       </div>
     )
   }
 }
 
-export default App
+export default Login
