@@ -7,21 +7,24 @@ import registerServiceWorker from './registerServiceWorker'
 import Header from './components/header'
 import Login from './routes/login'
 import Register from './routes/register'
-// import Footer from './components/footer'
+import Error from './components/error'
 
 import './scss/index.scss'
+import 'element-theme-default'
 
 class Index extends React.Component {
   render () {
     return (
       <div id='root-container'>
+        <Error />
         <Header history={this.props.history} />
-        <Switch>
-          <Route path='/register' component={Register} />
-          <Route path='/login' component={Login} />
-          <Redirect to='/login' />
-        </Switch>
-        {/* <Footer /> */}
+        <div id='container'>
+          <Switch>
+            <Route path='/register' component={Register} />
+            <Route path='/login' component={Login} />
+            <Redirect to='/login' />
+          </Switch>
+        </div>
       </div>
     )
   }

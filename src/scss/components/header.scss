@@ -20,6 +20,7 @@
     margin: 0;
     padding: 10px;
     width: 100%;
+    height: 10%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -33,12 +34,6 @@
         font-family: 'lato', monospace;
         font-weight: bold;
         font-size: 3rem;
-        &.scaleIn {
-            @include animation(1.5s scaleHeaderIn cubic-bezier(.04,.05,.03,1) forwards);
-        }
-        &.scaleOut {
-            @include animation(1.5s scaleHeaderOut cubic-bezier(.04,.05,.03,1) forwards);
-        }
     }
 
     ul {

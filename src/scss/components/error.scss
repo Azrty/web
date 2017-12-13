@@ -1,0 +1,30 @@
+#error {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &.success {
+        height: 10%;
+        background-color: #13CE66;
+    }
+    &.info {
+        height: 10%;
+        background-color: #20A0FF;
+    }
+    &.warning {
+        height: 10%;
+        background-color: #F7BA2A;
+    }
+    &.error {
+        height: 10%;
+        background-color: #FF4949;
+    }
+}

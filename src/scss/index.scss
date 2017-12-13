@@ -27,7 +27,19 @@ html, body, #root, #root-container {
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
     color: #343434;
-}    
+}
+
+#root-container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 90%;
+}
 
 a {
     text-decoration: none;
@@ -37,4 +49,7 @@ a {
 @import 'mixin.scss';
 
 @import 'components/header.scss';
+@import 'components/login.scss';
+@import 'components/register.scss';
+@import 'components/error.scss';
 // @import 'components/footer.scss';
