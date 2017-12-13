@@ -3,6 +3,7 @@ import { action, observable } from 'mobx'
 
 class Store {
   @observable error = ''
+  @observable isLogged = false
 
   @action notif(msg, status) {
     let errDiv = document.getElementById('error')
@@ -13,6 +14,10 @@ class Store {
       this.error = ''
       errDiv.classList.remove(status)
     }, 2000)
+  }
+
+  @action logState(state) {
+    this.isLogged = state
   }
 }
 

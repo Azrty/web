@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, Input } from 'element-react'
 
 import store from '../utils/store'
 import { auth } from '../utils/request'
@@ -9,25 +10,40 @@ class Login extends Component {
 
     this.state = {
       mail: '',
-      password: ''
+      password: '',
+      loading: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value })
+  handleChange (key, val) {
+    this.setState({ [key]: val })
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    store.notif('Salut', 'info')
-    auth().patch('/signin')
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err.response)
+    auth().patch('/signin', {
+      mail: this.state.mail,
+      password: this.state.password
+    }).then(res => {
+      if (res.data.success === true) {
+        global.localStorage.setItem('token', res.data.token)
+        store.logState(true)
+        this.props.history.push('/home')
+      } else {
+        store.notif(res.data.error, 'error')
+      }
+    }).catch(err => {
+      if (err.response) {
+        if (Array.isArray(err.response.data.error)) {
+          store.notif(err.response.data.error[0], 'error')
+        } else {
+          store.notif(err.response.data.error, 'error')
+        }
+      } else {
+        console.log(err)
+      }
     })
   }
 
@@ -35,15 +51,9 @@ class Login extends Component {
     return (
       <div id='login'>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Mail:
-            <input type='text' name='mail' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <label>
-            Password:
-            <input type='password' name='password' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type='submit' value='Send' />
+          <Input type='text' placeholder='Mail' value={this.state.mail} onChange={this.handleChange.bind(this, 'mail')} />
+          <Input type='password' placeholder='Password' value={this.state.password} onChange={this.handleChange.bind(this, 'password')} />
+          <Button type='primary' nativeType='submit' loading={this.state.loading}>Login</Button>
         </form>
       </div>
     )

@@ -14,8 +14,15 @@
         justify-content: center;
         align-items: center;
 
-        label {
-            
+        > .el-input {
+            margin: 2px;
+            width: 20%;
+            max-width: 300px;
+            min-width: 180px;
+        }
+
+        > .el-button {
+            margin-top: 2px;
         }
     }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { auth } from '../utils/request'
+import { Input, Button } from 'element-react'
 
+import { auth } from '../utils/request'
+import store from '../utils/store'
 class Register extends Component {
   constructor (props) {
     super(props)
@@ -11,52 +13,50 @@ class Register extends Component {
       password: '',
       confirmPwd: ''
     }
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value })
+  handleChange (key, val) {
+    this.setState({ [key]: val })
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    console.log(this.state)
     auth().post('/', {
       username: this.state.username,
       mail: this.state.mail,
       password: this.state.password,
       confirmPwd: this.state.confirmPwd
+    }).then(res => {
+      if (res.data.success === true) {
+        global.localStorage.setItem('token', res.data.token)
+        store.logState(true)
+        this.props.history.push('/home')
+      } else {
+        store.notif(res.data.error, 'error')
+      }
+    }).catch(err => {
+      if (err.response) {
+        if (Array.isArray(err.response.data.error)) {
+          store.notif(err.response.data.error[0], 'error')
+        } else {
+          store.notif(err.response.data.error, 'error')
+        }
+      } else {
+        console.log(err)
+      }
     })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err.response)
-      })
   }
 
   render () {
     return (
       <div id='register'>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
-          <input type='text' name='username' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <label>
-            Mail:
-          <input type='text' name='mail' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <label>
-            Password:
-          <input type='password' name='password' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <label>
-            Confirm password:
-          <input type='password' name='confirmPwd' value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type='submit' value='Submit' />
+          <Input type='text' placeholder='Username' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
+          <Input type='mail' placeholder='Mail' value={this.state.mail} onChange={this.handleChange.bind(this, 'mail')} />
+          <Input type='password' placeholder='Password' value={this.state.password} onChange={this.handleChange.bind(this, 'password')} />
+          <Input type='password' placeholder='Confirm' value={this.state.confirmPwd} onChange={this.handleChange.bind(this, 'confirmPwd')} />
+          <Button type='primary' nativeType='submit' loading={this.state.loading}>Register</Button>
         </form>
       </div>
     )
