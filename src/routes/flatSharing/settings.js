@@ -9,8 +9,15 @@ class FSSettings extends Component {
 
     this.state = {
       name: '',
+      userMail: '',
+      ownerMail: '',
       fs: {}
     }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange (e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   componentDidMount () {
@@ -45,14 +52,18 @@ class FSSettings extends Component {
     return (
       <div id='fs-settings'>
         {this.state.fs.name}
-        <label>Add owners
-          <input className='form-input' type='text' name='name' onChange={this.handleChange} />
-        </label>
-        <button className='form-btn' >Add</button>
-        <label>Add users
-          <input className='form-input' type='text' name='name' onChange={this.handleChange} />
-        </label>
-        <button className='form-btn' >Add</button>
+        <form onSubmit={() => console.log('TEST')}>
+          <label>Add owner
+            <input className='form-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
+          </label>
+          <button type='submit' className='form-btn' >Add</button>
+        </form>
+        <form onSubmit={() => console.log('TEST')}>
+          <label>Add user
+            <input className='form-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
+          </label>
+          <button className='form-btn' >Add</button>
+        </form>
       </div>
     )
   }
