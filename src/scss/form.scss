@@ -1,0 +1,53 @@
+@keyframes scaleHeaderOut {
+    0% {
+        background-color: var(--blue);
+    }
+    50% {
+        background-color: darken($blue, 10);
+    }
+    100% {
+        background-color: var(--blue);
+    }
+}
+
+.form-input {
+    margin: 2px;
+    padding: 5px;
+    width: 20%;
+    max-width: 300px;
+    min-width: 180px;
+    border: 1px solid #DCDFE6;
+    border-radius: 4px;
+    text-align: center;
+    transition: 0.2s border-color;
+
+    &::placeholder {
+        color: #C0C4CC;
+    }
+    &:hover {
+        transition: 0.2s border-color;
+        border-color: var(--blue);
+    }
+}
+
+
+.form-btn {
+    margin: 0;
+    margin-top: 2px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #FEFEFE;
+    font-weight: bold;
+    background-color: var(--blue);
+    transition: 0.5s background-color;
+
+    &:hover, &:focus {
+        transition: 0.5s background-color;
+        background-color: lighten($blue, 10)
+    }
+    &:active {
+        transition: 0.3s background-color;
+        background-color: darken($blue, 10)
+    }
+}

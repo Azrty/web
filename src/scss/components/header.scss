@@ -25,14 +25,15 @@
     justify-content: space-around;
     align-items: center;
     flex-shrink: 0;
-    background-color: #304051;
-    color: #f4f4f4;
+    border-bottom: 1px solid #E4E7ED;
+    background-color: #FEFEFE;
 
     p {
         margin: 0;
         padding: 0;
         font-family: 'lato', monospace;
-        font-weight: bold;
+        font-weight: lighter;
+        color: #303133;
         font-size: 3rem;
     }
 
@@ -47,8 +48,9 @@
             margin: 0 6px;
             padding: 4px;
             font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
+            font-weight: lighter;
             font-size: 1.2rem;
+            color: #303133;
             cursor: pointer;
         }
     }

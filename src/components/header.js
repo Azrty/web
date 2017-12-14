@@ -9,7 +9,7 @@ class Header extends Component {
   render () {
     return (
       <div id='header'>
-        <p ref={(elem) => { this.name = elem }} className='name'>FlatSharing</p>
+        <p ref={(elem) => { this.name = elem }} className='name'>FLATSHARING</p>
         {store.isLogged
         ? (
           <ul className='menu'>
