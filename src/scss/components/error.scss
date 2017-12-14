@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 0;
     position: fixed;
     top: 0;
     z-index: 100;
@@ -12,19 +13,23 @@
     align-items: center;
     
     &.success {
-        height: 10%;
+        height: auto;
+        padding: 20px;
         background-color: #13CE66;
     }
     &.info {
-        height: 10%;
+        height: auto;
+        padding: 20px;
         background-color: #20A0FF;
     }
     &.warning {
-        height: 10%;
+        height: auto;
+        padding: 20px;
         background-color: #F7BA2A;
     }
     &.error {
-        height: 10%;
+        height: auto;
+        padding: 20px;
         background-color: #FF4949;
     }
 }

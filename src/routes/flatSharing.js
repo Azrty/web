@@ -1,27 +1,11 @@
 import React, { Component } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { emojify } from 'react-emojione'
+import Show from './flatSharing/show'
+import Create from './flatSharing/create'
 
 import { flatSharing } from '../utils/request'
 import store from '../utils/store'
-
-const options = {
-  convertShortnames: true,
-  style: {
-    height: 16,
-    margin: 2
-  }
-}
-
-let ShowFlatSHaring = (props) => {
-  console.log(props)
-  return (
-    <div>
-      <div>{props.name}</div>
-    </div>
-  )
-}
-
 class FlatSharing extends Component {
   constructor (props) {
     super(props)
@@ -47,17 +31,12 @@ class FlatSharing extends Component {
 
   render () {
     return (
-      <div id='flatSharing'>
-        {this.state.flatsharing.length === 0
-        ? (
-          <div>
-            <p>{emojify('No flatsharing :cry:', options)}</p>
-            <button>Create one</button>
-          </div>
-        ) : (
-          this.state.flatsharing.map((elmt, index) => <ShowFlatSHaring name={elmt.name} index={index} />)
-        )}
-      </div>
+      <Switch>
+        <Route exact path='/flatsharing/show' component={Show} />
+        <Route exact path='/flatsharing/create' component={Create} />
+        <Route exact path='/flatsharing/update' component={Show} />
+        <Redirect to='/flatsharing/show' />
+      </Switch>
     )
   }
 }

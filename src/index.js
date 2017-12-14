@@ -10,7 +10,6 @@ import store from './utils/store'
 import Header from './components/header'
 import Login from './routes/login'
 import Register from './routes/register'
-import Home from './routes/home'
 import FlatSharing from './routes/flatSharing'
 import Settings from './routes/settings'
 import Error from './components/error'
@@ -36,13 +35,12 @@ class Index extends React.Component {
         <Header history={this.props.history} location={this.props.location} />
         <div id='container'>
           <Switch>
-            <Route path='/register' component={Register} />
-            <Route path='/login' component={Login} />
-            <Route path='/home' component={Home} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
             <Route path='/flatsharing' component={FlatSharing} />
-            <Route path='/settings' component={Settings} />
+            <Route exact path='/settings' component={Settings} />
             {store.isLogged
-            ? <Redirect to='/home' />
+            ? <Redirect to='/flatsharing' />
             : <Redirect to='/login' />}
           </Switch>
         </div>

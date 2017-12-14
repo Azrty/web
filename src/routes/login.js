@@ -16,8 +16,8 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (key, val) {
-    this.setState({ [key]: val })
+  handleChange (e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit (e) {
@@ -53,8 +53,8 @@ class Login extends Component {
     return (
       <div id='login'>
         <form onSubmit={this.handleSubmit}>
-          <input className='form-input' type='text' placeholder='Mail' value={this.state.mail} onChange={this.handleChange.bind(this, 'mail')} />
-          <input className='form-input' type='password' placeholder='Password' value={this.state.password} onChange={this.handleChange.bind(this, 'password')} />
+          <input className='form-input' type='text' name='mail' placeholder='Mail' value={this.state.mail} onChange={this.handleChange} />
+          <input className='form-input' type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.handleChange} />
           <button className='form-btn' type='submit'>Login</button>
         </form>
       </div>
