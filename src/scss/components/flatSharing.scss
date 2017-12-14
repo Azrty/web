@@ -1,4 +1,4 @@
-#ShowFS {
+#fs-show {
     width: 100%;
     height: 100%;
     display: flex;
@@ -29,7 +29,7 @@
                 align-items: center;
 
                 > .fs-name {
-                    width: 20%;
+                    width: 200px;
                     text-align: center;
                 }
                 > .fs-tool {
@@ -44,4 +44,13 @@
             }
         }
     }
+}
+
+#fs-settings {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

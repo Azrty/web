@@ -48,7 +48,7 @@ class ShowFS extends Component {
 
   render () {
     return (
-      <div id='ShowFS'>
+      <div id='fs-show'>
         {this.state.flatsharing.length === 0
           ? (
             <div>
