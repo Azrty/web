@@ -7,7 +7,6 @@
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
     "react": "^16.1.1",
-    "react-bootstrap": "^0.31.5",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.1.1",
     "react-emojione": "^5.0.0",

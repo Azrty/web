@@ -7,9 +7,41 @@
     align-items: center;
 
     > div {
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        
+        > .fs-container {
+            margin: 5px;
+            width: 60%;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+
+            > .fs {
+                margin: 5px;
+                display: flex;
+                flex-direction: row nowrap;
+                justify-content: space-around;
+                align-items: center;
+
+                > .fs-name {
+                    width: 20%;
+                    text-align: center;
+                }
+                > .fs-tool {
+                    > .icon {
+                        margin: 4px;
+                        padding: 4px;
+                        height: 32px;
+                        width: 32px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }

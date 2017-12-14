@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { emojify } from 'react-emojione'
 
+import FlatSharingComp from '../../components/fs-show'
+
 import { flatSharing } from '../../utils/request'
 import store from '../../utils/store'
 
@@ -11,14 +13,6 @@ const options = {
     height: 16,
     margin: 2
   }
-}
-
-let ShowFlatSHaring = (props) => {
-  return (
-    <div>
-      <div>{props.name}</div>
-    </div>
-  )
 }
 
 class ShowFS extends Component {
@@ -44,6 +38,14 @@ class ShowFS extends Component {
     })
   }
 
+  deleteById (id) {
+    let newArr = this.state.flatsharing
+    newArr.splice(newArr.indexOf(id), 1)
+    this.setState({
+      flatsharing: newArr
+    })
+  }
+
   render () {
     return (
       <div id='ShowFS'>
@@ -58,7 +60,15 @@ class ShowFS extends Component {
           ) : (
             <div>
               <div className='fs-container'>
-                {this.state.flatsharing.map((elmt, index) => <ShowFlatSHaring key={index} name={elmt.name} />)}
+                {this.state.flatsharing.map(elmt => {
+                  return <FlatSharingComp
+                    key={elmt._id}
+                    name={elmt.name}
+                    id={elmt._id}
+                    delete={this.deleteById.bind(this)}
+                    history={this.props.history}
+                />
+                })}
               </div>
               <button className='form-btn' onClick={() => {
                 this.props.history.push('/flatsharing/create')

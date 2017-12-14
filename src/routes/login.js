@@ -10,7 +10,6 @@ class Login extends Component {
     this.state = {
       mail: '',
       password: '',
-      loading: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,12 +21,10 @@ class Login extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    this.setState({loading: true})
     auth().patch('/signin', {
       mail: this.state.mail,
       password: this.state.password
     }).then(res => {
-      this.setState({loading: false})
       if (res.data.success === true) {
         global.localStorage.setItem('token', res.data.token)
         store.logState(true)
@@ -36,7 +33,6 @@ class Login extends Component {
         store.notif(res.data.error, 'error')
       }
     }).catch(err => {
-      this.setState({loading: false})
       if (err.response) {
         if (Array.isArray(err.response.data.error)) {
           store.notif(err.response.data.error[0], 'error')

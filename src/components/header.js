@@ -13,7 +13,6 @@ class Header extends Component {
         {store.isLogged
         ? (
           <ul className='menu'>
-            <Link to='/home'><li>Home</li></Link>
             <Link to='/flatsharing'><li>Flatsharing</li></Link>
             <Link to='/settings'><li>Settings</li></Link>
           </ul>
