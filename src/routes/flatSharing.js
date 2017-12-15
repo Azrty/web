@@ -11,7 +11,7 @@ class FlatSharing extends Component {
       <Switch>
         <Route exact path='/flatsharing/show' component={Show} />
         <Route exact path='/flatsharing/create' component={Create} />
-        <Route exact path='/flatsharing/settings/:id' component={Settings} />
+        <Route exact path='/flatsharing/:id/settings' component={Settings} />
         <Redirect to='/flatsharing/show' />
       </Switch>
     )

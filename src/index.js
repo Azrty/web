@@ -11,6 +11,7 @@ import Header from './components/header'
 import Login from './routes/login'
 import Register from './routes/register'
 import FlatSharing from './routes/flatSharing'
+import Purchases from './routes/purchases'
 import Settings from './routes/settings'
 import Error from './components/error'
 
@@ -37,6 +38,7 @@ class Index extends React.Component {
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route path='/flatsharing/:flatSharingId/purchases' component={Purchases} />
             <Route path='/flatsharing' component={FlatSharing} />
             <Route exact path='/settings' component={Settings} />
             {store.isLogged
