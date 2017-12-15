@@ -3,6 +3,7 @@ import { action, observable } from 'mobx'
 
 class Store {
   @observable error = ''
+  @observable timeOutError = null
   @observable isLogged = false
 
   @action notif(msg, status) {
@@ -10,7 +11,8 @@ class Store {
 
     this.error = msg
     errDiv.classList.add(status)
-    setTimeout(() => {
+    clearTimeout(this.timeOutError)
+    this.timeOutError = setTimeout(() => {
       this.error = ''
       errDiv.classList.remove(status)
     }, 2000)
