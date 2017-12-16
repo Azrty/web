@@ -13,14 +13,14 @@ import Register from './routes/register'
 import FlatSharing from './routes/flatSharing'
 import Purchases from './routes/purchases'
 import Settings from './routes/settings'
-import Error from './components/error'
+import Notification from './components/notification'
 
 import './scss/index.scss'
 
 @observer
 class Index extends React.Component {
   componentWillMount () {
-    if (global.localStorage.getItem('token')) store.logState(true)
+    if (global.localStorage.getItem('token')) store.user.logState(true)
     if (global.localStorage.getItem('token') &&
     (this.props.location.pathname.indexOf('login') !== -1 &&
     this.props.location.pathname.indexOf('register') !== -1)) this.props.history.push('/home')
@@ -32,7 +32,7 @@ class Index extends React.Component {
   render () {
     return (
       <div id='root-container'>
-        <Error />
+        <Notification />
         <Header history={this.props.history} location={this.props.location} />
         <div id='container'>
           <Switch>
@@ -41,7 +41,7 @@ class Index extends React.Component {
             <Route path='/flatsharing/:flatSharingId/purchases' component={Purchases} />
             <Route path='/flatsharing' component={FlatSharing} />
             <Route exact path='/settings' component={Settings} />
-            {store.isLogged
+            {store.user.isLogged
             ? <Redirect to='/flatsharing' />
             : <Redirect to='/login' />}
           </Switch>

@@ -28,15 +28,15 @@ class CreateFS extends Component {
       if (res.data.success === true) {
         this.props.history.push('/flatsharing/show')
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       this.setState({ loading: false })
       if (err.response) {
         if (Array.isArray(err.response.data.error)) {
-          store.notif(err.response.data.error[0], 'error')
+          store.notif.add(err.response.data.error[0], 'error')
         } else {
-          store.notif(err.response.data.error, 'error')
+          store.notif.add(err.response.data.error, 'error')
         }
       } else {
         console.log(err)

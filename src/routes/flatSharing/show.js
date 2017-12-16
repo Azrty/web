@@ -31,7 +31,7 @@ class ShowFS extends Component {
           flatsharing: res.data.flatSharing
         })
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       console.log(err)

@@ -31,9 +31,9 @@ class FSSettings extends Component {
     .catch(err => {
       if (err.response) {
         if (Array.isArray(err.response.data.error)) {
-          store.notif(err.response.data.error[0], 'error')
+          store.notif.add(err.response.data.error[0], 'error')
         } else {
-          store.notif(err.response.data.error, 'error')
+          store.notif.add(err.response.data.error, 'error')
         }
       } else {
         console.log(err)
@@ -47,7 +47,7 @@ class FSSettings extends Component {
       name: this.state.name
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('Name changed!', 'success')
+        store.notif.add('Name changed!', 'success')
         this.setState(prevState => {
           let fs = prevState.fs
           fs.name = prevState.name
@@ -59,9 +59,9 @@ class FSSettings extends Component {
       }
     }).catch(err => {
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
-        store.notif(`Can't reach server`, 'error')
+        store.notif.add(`Can't reach server`, 'error')
       }
     })
   }
@@ -73,14 +73,14 @@ class FSSettings extends Component {
       mail: this.state.userMail
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('User added!', 'success')
+        store.notif.add('User added!', 'success')
         this.setState({ userMail: '' })
       }
     }).catch(err => {
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
-        store.notif(`Can't reach server`, 'error')
+        store.notif.add(`Can't reach server`, 'error')
       }
     })
   }
@@ -92,14 +92,14 @@ class FSSettings extends Component {
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('Owner added!', 'success')
+        store.notif.add('Owner added!', 'success')
         this.setState({ ownerMail: '' })
       }
     }).catch(err => {
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
-        store.notif(`Can't reach server`, 'error')
+        store.notif.add(`Can't reach server`, 'error')
       }
     })
   }
@@ -110,16 +110,16 @@ class FSSettings extends Component {
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('Owner deleted!', 'success')
+        store.notif.add('Owner deleted!', 'success')
         e.target.parentNode.removeChild(e.target)
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
-        store.notif(`Can't reach server`, 'error')
+        store.notif.add(`Can't reach server`, 'error')
       }
     })
   }
@@ -130,16 +130,16 @@ class FSSettings extends Component {
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('Owner deleted!', 'success')
+        store.notif.add('Owner deleted!', 'success')
         e.target.parentNode.removeChild(e.target)
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
-        store.notif(`Can't reach server`, 'error')
+        store.notif.add(`Can't reach server`, 'error')
       }
     })
   }

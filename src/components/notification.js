@@ -4,14 +4,14 @@ import { observer } from 'mobx-react'
 import store from '../utils/store.js'
 
 @observer
-class Error extends Component {
+class Notification extends Component {
   render () {
     return (
-      <div id='error'>
-        {store.error}
+      <div id='notification'>
+        {store.notif.notification}
       </div>
     )
   }
 }
 
-export default Error
+export default Notification

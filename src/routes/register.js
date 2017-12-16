@@ -30,17 +30,17 @@ class Register extends Component {
     }).then(res => {
       if (res.data.success === true) {
         global.localStorage.setItem('token', res.data.token)
-        store.logState(true)
+        store.user.logState(true)
         this.props.history.push('/home')
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       if (err.response) {
         if (Array.isArray(err.response.data.error)) {
-          store.notif(err.response.data.error[0], 'error')
+          store.notif.add(err.response.data.error[0], 'error')
         } else {
-          store.notif(err.response.data.error, 'error')
+          store.notif.add(err.response.data.error, 'error')
         }
       } else {
         console.log(err)

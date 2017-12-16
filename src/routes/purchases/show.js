@@ -28,16 +28,16 @@ class PurchasesView extends Component {
       if (res.data.success === true) {
         this.setState({stats: res.data.stats})
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     })
     .catch(err => {
       this.setState({ loading: false })
       if (err.response) {
-        store.notif(err.response.data.error, 'error')
+        store.notif.add(err.response.data.error, 'error')
       } else {
         console.log(err)
-        store.notif(`Can't reach your server...`, 'error')
+        store.notif.add(`Can't reach your server...`, 'error')
       }
     })
   }

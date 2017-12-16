@@ -6,12 +6,12 @@ class Add extends Component {
 
     this.state = {
       shop: '',
-      amount: 0,
+      amount: '',
       buyer: '',
       desc: ''
     }
     this.handleChange = this.handleChange.bind(this)
-  }  
+  }
 
   handleChange (e) {
     if (e.target.name === 'amount') return this.setState({ [e.target.name]: parseFloat(e.target.value) })

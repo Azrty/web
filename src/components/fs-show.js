@@ -12,17 +12,17 @@ class FlatSharingComp extends Component {
     flatSharing().delete('/flatsharing/' + this.props.id)
     .then(res => {
       if (res.data.success === true) {
-        store.notif('Flatsharing deleted!', 'success')
+        store.notif.add('Flatsharing deleted!', 'success')
         this.props.delete(this.props.id)
       } else {
-        store.notif(res.data.error, 'error')
+        store.notif.add(res.data.error, 'error')
       }
     }).catch(err => {
       if (err.response) {
         if (Array.isArray(err.response.data.error)) {
-          store.notif(err.response.data.error[0], 'error')
+          store.notif.add(err.response.data.error[0], 'error')
         } else {
-          store.notif(err.response.data.error, 'error')
+          store.notif.add(err.response.data.error, 'error')
         }
       } else {
         console.log(err)

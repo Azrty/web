@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <div id='header'>
         <p ref={(elem) => { this.name = elem }} className='name'>FLATSHARING</p>
-        {store.isLogged
+        {store.user.isLogged
         ? (
           <ul className='menu'>
             <Link to='/flatsharing'><li>Flatsharing</li></Link>
