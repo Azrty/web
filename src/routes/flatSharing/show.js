@@ -53,7 +53,7 @@ class ShowFS extends Component {
           ? (
             <div>
               <p>{emojify('No flatsharing :cry:', options)}</p>
-              <button className='form-btn' onClick={() => {
+              <button className='primary-btn' onClick={() => {
                 this.props.history.push('/flatsharing/create')
               }}>Create one</button>
             </div>
@@ -70,7 +70,7 @@ class ShowFS extends Component {
                 />
                 })}
               </div>
-              <button className='form-btn' onClick={() => {
+              <button className='primary-btn' onClick={() => {
                 this.props.history.push('/flatsharing/create')
               }}>Add one</button>
             </div>

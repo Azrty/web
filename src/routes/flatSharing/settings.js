@@ -10,6 +10,7 @@ class FSSettings extends Component {
     this.state = {
       userMail: '',
       ownerMail: '',
+      name: '',
       fs: {}
     }
     this.handleChange = this.handleChange.bind(this)
@@ -42,11 +43,19 @@ class FSSettings extends Component {
 
   changeName (e) {
     e.preventDefault()
-    flatSharing().put(`/`, {
+    flatSharing().put(`/flatsharing/${this.props.match.params.id}`, {
       name: this.state.name
     }).then(res => {
       if (res.data.success === true) {
-        store.notif('User added!', 'success')
+        store.notif('Name changed!', 'success')
+        this.setState(prevState => {
+          let fs = prevState.fs
+          fs.name = prevState.name
+          return {
+            name: '',
+            fs
+          }
+        })
       }
     }).catch(err => {
       if (err.response) {
@@ -65,6 +74,7 @@ class FSSettings extends Component {
     }).then(res => {
       if (res.data.success === true) {
         store.notif('User added!', 'success')
+        this.setState({ userMail: '' })
       }
     }).catch(err => {
       if (err.response) {
@@ -83,6 +93,7 @@ class FSSettings extends Component {
     }).then(res => {
       if (res.data.success === true) {
         store.notif('Owner added!', 'success')
+        this.setState({ ownerMail: '' })
       }
     }).catch(err => {
       if (err.response) {
@@ -136,11 +147,11 @@ class FSSettings extends Component {
   render () {
     return (
       <div id='fs-settings'>
-        <form className='changeName' onSubmit={this.addUser.bind(this)}>
+        <form className='changeName' onSubmit={this.changeName.bind(this)}>
           <label>Name:
-            <input className='form-input' type='email' name='name' placeholder={this.state.fs.name} value={this.state.name} onChange={this.handleChange} />
+            <input className='primary-input' type='text' name='name' placeholder={this.state.fs.name} value={this.state.name} onChange={this.handleChange} />
           </label>
-          <button className='form-btn' >Change</button>
+          <button className='primary-btn' >Change</button>
         </form>
         <div className='owners'>
           <p>Owners:</p>
@@ -152,9 +163,9 @@ class FSSettings extends Component {
         </div>
         <form className='addOwner' onSubmit={this.addUser.bind(this)}>
           <label>Add
-            <input className='form-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
+            <input className='primary-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
           </label>
-          <button className='form-btn' >Add</button>
+          <button className='primary-btn' >Add</button>
         </form>
         <div className='users'>
           <p>Users:</p>
@@ -166,9 +177,9 @@ class FSSettings extends Component {
         </div>
         <form className='addUser' onSubmit={this.addOwner.bind(this)}>
           <label>Add
-            <input className='form-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
+            <input className='primary-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
           </label>
-          <button type='submit' className='form-btn' >Add</button>
+          <button type='submit' className='primary-btn' >Add</button>
         </form>
       </div>
     )

@@ -48,8 +48,8 @@ class CreateFS extends Component {
     return (
       <div id='login'>
         <form onSubmit={this.handleSubmit}>
-          <input className='form-input' type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.handleChange} />
-          <button className='form-btn' type='submit'>Create</button>
+          <input className='primary-input' type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.handleChange} />
+          <button className='primary-btn' type='submit'>Create</button>
         </form>
       </div>
     )
