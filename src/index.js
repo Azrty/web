@@ -15,6 +15,7 @@ import Purchases from './routes/purchases'
 import Settings from './routes/settings'
 import Notification from './components/notification'
 
+import 'react-select/dist/react-select.css';
 import './scss/index.scss'
 
 @observer

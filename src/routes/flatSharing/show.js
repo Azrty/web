@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-
-import { emojify } from 'react-emojione'
+import store from '../../utils/store'
+import { observer } from 'mobx-react'
 
 import FlatSharingComp from '../../components/fs-show'
 
-import { flatSharing } from '../../utils/request'
-import store from '../../utils/store'
+import { emojify } from 'react-emojione'
 
 const options = {
   convertShortnames: true,
@@ -15,41 +14,16 @@ const options = {
   }
 }
 
+@observer
 class ShowFS extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      flatsharing: []
-    }
-  }
-
   componentWillMount () {
-    flatSharing().get('/flatsharing').then(res => {
-      if (res.data.success === true) {
-        this.setState({
-          flatsharing: res.data.flatSharing
-        })
-      } else {
-        store.notif.add(res.data.error, 'error')
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  deleteById (id) {
-    let newArr = this.state.flatsharing
-    newArr.splice(newArr.indexOf(id), 1)
-    this.setState({
-      flatsharing: newArr
-    })
+    store.flatSharing.getFlatSharings()
   }
 
   render () {
     return (
       <div id='fs-show'>
-        {this.state.flatsharing.length === 0
+        {store.flatSharing.flatSharings.length === 0
           ? (
             <div>
               <p>{emojify('No flatsharing :cry:', options)}</p>
@@ -60,12 +34,11 @@ class ShowFS extends Component {
           ) : (
             <div>
               <div className='fs-container'>
-                {this.state.flatsharing.map(elmt => {
+                {store.flatSharing.flatSharings.map(elmt => {
                   return <FlatSharingComp
                     key={elmt._id}
                     name={elmt.name}
                     id={elmt._id}
-                    delete={this.deleteById.bind(this)}
                     history={this.props.history}
                 />
                 })}
