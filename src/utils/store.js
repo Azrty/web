@@ -43,7 +43,11 @@ class UserStore {
 
 class FlatSharingStore {
   @observable flatSharings = []
-  @observable currentFlatSharing = {}
+  @observable currentFlatSharingId = ''
+  @observable currentFlatSharingName = ''
+  @observable currentFlatSharingOwners = []
+  @observable currentFlatSharingUsers = []
+  @observable currentFlatSharingShopList = []
 
   @action getFlatSharings () {
     flatSharing().get(`/flatsharing`)
@@ -59,12 +63,14 @@ class FlatSharingStore {
   }
 
   @action getFlatSharing (id) {
-    if (this.currentFlatSharing._id || this.currentFlatSharing._id === id) return this.currentFlatSharing = this.currentFlatSharing
     flatSharing().get(`/flatsharing/${id}`)
     .then(res => {
       if (res.data.success === true) {
-        console.log(res)
-        this.currentFlatSharing = res.data.flatSharing
+        this.currentFlatSharingId = res.data.flatSharing._id
+        this.currentFlatSharingName = res.data.flatSharing.name
+        this.currentFlatSharingOwners = res.data.flatSharing.owners
+        this.currentFlatSharingUsers = res.data.flatSharing.users
+        this.currentFlatSharingShopList = res.data.flatSharing.shoppingList
       }
     }).catch(err => {
       if (err.response) {
