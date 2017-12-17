@@ -69,7 +69,7 @@ class FSSettings extends Component {
   addUser (e) {
     e.preventDefault()
     flatSharing().post(`/flatsharing/user`, {
-      flatSharingId: this.props.match.params.id,
+      flatSharing: this.props.match.params.id,
       mail: this.state.userMail
     }).then(res => {
       if (res.data.success === true) {
@@ -88,7 +88,7 @@ class FSSettings extends Component {
   addOwner (e) {
     e.preventDefault()
     flatSharing().post(`/flatsharing/owner`, {
-      flatSharingId: this.props.match.params.id,
+      flatSharing: this.props.match.params.id,
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
@@ -161,23 +161,23 @@ class FSSettings extends Component {
           })
           : null}
         </div>
-        <form className='addOwner' onSubmit={this.addUser.bind(this)}>
+        <form className='addOwner' onSubmit={this.addOwner.bind(this)}>
           <label>Add
-            <input className='primary-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
+            <input className='primary-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
           </label>
           <button className='primary-btn' >Add</button>
         </form>
         <div className='users'>
           <p>Users:</p>
           {this.state.fs.users
-            ? this.state.fs.owners.map(elmt => {
+            ? this.state.fs.users.map(elmt => {
               return <p key={elmt._id} onClick={this.deleteUser.bind(this, elmt._id)}>{elmt.username}</p>
             })
           : null}
         </div>
-        <form className='addUser' onSubmit={this.addOwner.bind(this)}>
+        <form className='addUser' onSubmit={this.addUser.bind(this)}>
           <label>Add
-            <input className='primary-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
+            <input className='primary-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
           </label>
           <button type='submit' className='primary-btn' >Add</button>
         </form>

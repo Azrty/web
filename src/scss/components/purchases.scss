@@ -5,6 +5,19 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+
+    > .stats {
+        > .userStats {
+            padding: 10px;
+            border-radius: 3px;
+
+            > p {
+                color: inherit;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
 }
 
 #addPurchase {

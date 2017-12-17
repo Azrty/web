@@ -51,9 +51,10 @@ class PurchasesView extends Component {
         g: Math.floor(Math.random() * 255) + 1,
         b: Math.floor(Math.random() * 255) + 1
       }
-      console.log(r, g, b)
+      let coef = Math.round(((parseInt(r, 10) * 299) + (parseInt(g, 10) * 587) + (parseInt(b, 10) * 114)) / 1000, 10)
       elmts[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`
-      elmts[index].style.boxShadow = `rgba(${r}, ${g}, ${b}, 0.5) 0px 6px 20px`
+      elmts[index].style.boxShadow = `0px 8px 20px 5px rgba(${r}, ${g}, ${b}, 0.5) `
+      elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
     }
   }
 
@@ -81,14 +82,14 @@ class PurchasesView extends Component {
               return (
                 <div className='userStats' key={elmt.id}>
                   <p>{elmt.username}</p>
-                  <p>{elmt.amount.toFixed(2)}</p>
-                  <p>{elmt.pourcentage}%</p>
+                  <p>{elmt.amount.toFixed(2)}€</p>
+                  <p>{elmt.pourcentage.toFixed(2)}%</p>
                 </div>
               )
             })}
             <div className='globalStats'>
-              <p>{this.state.stats.maxAmount.toFixed(2)}</p>
-              <p>{this.state.stats.totalAmount.toFixed(2)}</p>
+              <p>Max amount: {this.state.stats.maxAmount.toFixed(2)}€</p>
+              <p>Total amount: {this.state.stats.totalAmount.toFixed(2)}€</p>
             </div>
           </div>
         ) : (
