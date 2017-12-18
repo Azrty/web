@@ -23,7 +23,6 @@ class FSSettings extends Component {
   componentDidMount () {
     flatSharing().get(`/flatsharing/${this.props.match.params.id}`)
     .then(res => {
-      console.log(res.data)
       if (res.data.success === true) {
         this.setState({fs: res.data.flatSharing})
       }
@@ -75,6 +74,7 @@ class FSSettings extends Component {
       if (res.data.success === true) {
         store.notif.add('User added!', 'success')
         this.setState({ userMail: '' })
+        this.forceUpdate()
       }
     }).catch(err => {
       if (err.response) {
@@ -94,6 +94,7 @@ class FSSettings extends Component {
       if (res.data.success === true) {
         store.notif.add('Owner added!', 'success')
         this.setState({ ownerMail: '' })
+        this.forceUpdate()
       }
     }).catch(err => {
       if (err.response) {
@@ -105,13 +106,14 @@ class FSSettings extends Component {
   }
 
   deleteOwner (id, e) {
+    let target = e.target
     flatSharing().delete(`/flatsharing/${this.props.match.params.id}/owner/${id}`, {
       flatSharingId: this.props.match.params.id,
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
         store.notif.add('Owner deleted!', 'success')
-        e.target.parentNode.removeChild(e.target)
+        target.parentNode.removeChild(target)
       } else {
         store.notif.add(res.data.error, 'error')
       }
@@ -125,13 +127,14 @@ class FSSettings extends Component {
   }
 
   deleteUser (id, e) {
+    let target = e.target
     flatSharing().delete(`/flatsharing/${this.props.match.params.id}/user/${id}`, {
       flatSharingId: this.props.match.params.id,
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
         store.notif.add('Owner deleted!', 'success')
-        e.target.parentNode.removeChild(e.target)
+        target.parentNode.removeChild(target)
       } else {
         store.notif.add(res.data.error, 'error')
       }

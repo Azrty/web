@@ -78,15 +78,17 @@ class PurchasesView extends Component {
         {this.state.stats.users && this.state.stats.users.length > 0
         ? (
           <div className='stats'>
-            {this.state.stats.users.map(elmt => {
-              return (
-                <div className='userStats' key={elmt.id}>
-                  <p>{elmt.username}</p>
-                  <p>{elmt.amount.toFixed(2)}€</p>
-                  <p>{elmt.pourcentage.toFixed(2)}%</p>
-                </div>
-              )
-            })}
+            <div className='statsContainer'>
+              {this.state.stats.users.map(elmt => {
+                return (
+                  <div className='userStats' key={elmt.id}>
+                    <p>{elmt.username}</p>
+                    <p>{elmt.amount.toFixed(2)}€</p>
+                    <p>{elmt.pourcentage.toFixed(2)}%</p>
+                  </div>
+                )
+              })}
+            </div>
             <div className='globalStats'>
               <p>Max amount: {this.state.stats.maxAmount.toFixed(2)}€</p>
               <p>Total amount: {this.state.stats.totalAmount.toFixed(2)}€</p>

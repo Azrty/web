@@ -7,16 +7,35 @@
     align-items: center;
 
     > .stats {
-        > .userStats {
-            padding: 10px;
-            border-radius: 3px;
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
 
-            > p {
-                color: inherit;
-                padding: 0;
-                margin: 0;
+        > .statsContainer {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+
+            > .userStats {
+                padding: 10px;
+                width: 100px;
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+                align-items: center;
+                border-radius: 3px;
+    
+                > p {
+                    color: inherit;
+                    padding: 0;
+                    margin: 0;
+                }
             }
         }
+
     }
 }
 
