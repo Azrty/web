@@ -6,6 +6,57 @@
     justify-content: center;
     align-items: center;
 
+    .graph {
+        position:relative;
+        width:600px;
+        height:300px;
+        background:#fff;
+        overflow:hidden;
+        border-radius:3px;
+
+        .inner {
+            display: none;
+            box-sizing: content-box;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(50%);
+            background-image: linear-gradient(-30deg, transparent 0%, transparent 50%, #209F85 50%, #209F85 100%), linear-gradient(45deg, #E3724D 0%, #E3724D 50%, #E38362 50%, #E38362 100%);
+            border-radius: 50%;
+            
+            > .inner-after{
+                box-sizing: content-box;
+                position:absolute;
+                top: 8px;
+                left: 8px;
+                width: calc(100% - 16px);
+                height: calc(100% - 16px);
+                transform: rotateZ(-45deg);
+                background-color: #F24;
+                // border-top: 8px solid rgba(255, 255, 255, 0.5);
+                // border-right : 8px solid rgba(255, 255, 255, 0.5);
+                // border-left : 8px solid black;
+                // border-bottom : 8px solid black;
+                border-radius: 100%;
+            }
+        }
+        $count: 10;
+        $size: 100 / $count * 1%;
+        @for $i from 0 through $count {
+            .inner:nth-of-type(#{$i}) {
+                z-index: 2 * $i;
+                display: block;
+                width: ($count - $i) * $size;
+                height: (($count - $i) * $size) * 2;
+                right: 100 - ($count - $i) * ($count - $i) * 1%;
+
+                > .inner-after {
+                    z-index: 2 * $i + 1;
+                }
+            }
+        }
+    }
+
     > .stats {
         width: 100%;
         display: flex;
@@ -13,7 +64,7 @@
         justify-content: center;
         align-items: center;
 
-        > .statsContainer {
+        > .statsContainer { 
             display: flex;
             flex-flow: row nowrap;
             justify-content: center;
@@ -48,6 +99,7 @@
     align-items: center;
 
     > .Select {
+        z-index: 0;
         margin: 2px;
         width: 20%;
         max-width: 300px;

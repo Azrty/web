@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { transition } from 'd3-transition'
 import { flatSharing } from '../../utils/request'
 import store from '../../utils/store'
 
@@ -43,19 +43,21 @@ class PurchasesView extends Component {
   }
 
   componentDidUpdate () {
+    let color = []
     let elmts = document.getElementsByClassName('userStats')
     if (elmts.length === 0) return
     for (let index = 0; index < elmts.length; index++) {
-      let { r, g, b } = {
+      color[index] = {
         r: Math.floor(Math.random() * 255) + 1,
         g: Math.floor(Math.random() * 255) + 1,
         b: Math.floor(Math.random() * 255) + 1
       }
-      let coef = Math.round(((parseInt(r, 10) * 299) + (parseInt(g, 10) * 587) + (parseInt(b, 10) * 114)) / 1000, 10)
-      elmts[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`
-      elmts[index].style.boxShadow = `0px 8px 20px 5px rgba(${r}, ${g}, ${b}, 0.5) `
+      let coef = Math.round(((parseInt(color[index].r, 10) * 299) + (parseInt(color[index].g, 10) * 587) + (parseInt(color[index].b, 10) * 114)) / 1000, 10)
+      elmts[index].style.backgroundColor = `rgb(${color[index].r}, ${color[index].g}, ${color[index].b})`
+      elmts[index].style.boxShadow = `0px 8px 20px 5px rgba(${color[index].r}, ${color[index].g}, ${color[index].b}, 0.5) `
       elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
     }
+    // transition().selectAll('.inner-after').style('transform', 'rotateZ(135deg)').duration(2000).delay((d, i) => i * 200)
   }
 
   newPurchase (e) {
@@ -78,6 +80,15 @@ class PurchasesView extends Component {
         {this.state.stats.users && this.state.stats.users.length > 0
         ? (
           <div className='stats'>
+            <div className='graph'>
+              {this.state.stats.users.map(elmt => {
+                return (
+                  <div className='inner' key={elmt.id}>
+                    <div className='inner-after' />
+                  </div>
+                )
+              })}
+            </div>
             <div className='statsContainer'>
               {this.state.stats.users.map(elmt => {
                 return (
