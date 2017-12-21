@@ -56,8 +56,15 @@ class PurchasesView extends Component {
       elmts[index].style.backgroundColor = `rgb(${color[index].r}, ${color[index].g}, ${color[index].b})`
       elmts[index].style.boxShadow = `0px 8px 20px 5px rgba(${color[index].r}, ${color[index].g}, ${color[index].b}, 0.5) `
       elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
+      elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
     }
-    // transition().selectAll('.inner-after').style('transform', 'rotateZ(135deg)').duration(2000).delay((d, i) => i * 200)
+    let inner = document.getElementsByClassName('inner')
+    if (inner.length === 0) return
+    for (let index = 0; index < inner.length; index++) {
+      setTimeout(() => {
+        inner[index].classList.add('rotate')
+      }, (index + 0.5) * 1000)
+    }
   }
 
   newPurchase (e) {

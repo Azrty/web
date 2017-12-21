@@ -20,23 +20,23 @@
             position: absolute;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%) translateY(50%);
+            transform: translate(-50%, 50%);
             background-image: linear-gradient(-30deg, transparent 0%, transparent 50%, #209F85 50%, #209F85 100%), linear-gradient(45deg, #E3724D 0%, #E3724D 50%, #E38362 50%, #E38362 100%);
             border-radius: 50%;
+
+            &.rotate {
+                transform: translate(-50%, 50%) rotateZ(135deg);
+                transition: 1s transform linear;
+            }
             
-            > .inner-after{
+            > .inner-after {
                 box-sizing: content-box;
                 position:absolute;
                 top: 8px;
                 left: 8px;
                 width: calc(100% - 16px);
                 height: calc(100% - 16px);
-                transform: rotateZ(-45deg);
                 background-color: #F24;
-                // border-top: 8px solid rgba(255, 255, 255, 0.5);
-                // border-right : 8px solid rgba(255, 255, 255, 0.5);
-                // border-left : 8px solid black;
-                // border-bottom : 8px solid black;
                 border-radius: 100%;
             }
         }
