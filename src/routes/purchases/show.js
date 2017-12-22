@@ -63,7 +63,7 @@ class PurchasesView extends Component {
                 linear-gradient(${180 / 100 * this.state.stats.users[index].pourcentage}deg, #343434 0%, #343434 50%, RGB(${color[index].r}, ${color[index].g}, ${color[index].b}) 50%, RGB(${color[index].r}, ${color[index].g}, ${color[index].b}) 100%)`
       setTimeout(() => {
         inner[index].classList.add('rotate')
-      }, (index + 0.5) * 1000)
+      }, index * 400 + 500)
     }
   }
 
