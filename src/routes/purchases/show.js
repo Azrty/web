@@ -60,7 +60,7 @@ class PurchasesView extends Component {
     if (inner.length === 0) return
     for (let index = 0; index < inner.length; index++) {
       inner[index].style.backgroundImage = `linear-gradient(0deg, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%),
-                linear-gradient(${180 / 100 * this.state.stats.users[index].pourcentage}deg, red 0%, red 50%, blue 50%, blue 100%)`
+                linear-gradient(${180 / 100 * this.state.stats.users[index].pourcentage}deg, #343434 0%, #343434 50%, RGB(${color[index].r}, ${color[index].g}, ${color[index].b}) 50%, RGB(${color[index].r}, ${color[index].g}, ${color[index].b}) 100%)`
       setTimeout(() => {
         inner[index].classList.add('rotate')
       }, (index + 0.5) * 1000)
