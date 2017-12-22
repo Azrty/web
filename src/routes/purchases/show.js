@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { transition } from 'd3-transition'
 import { flatSharing } from '../../utils/request'
 import store from '../../utils/store'
 
