@@ -7,12 +7,12 @@
     align-items: center;
 
     .graph {
-        position:relative;
-        width:600px;
-        height:300px;
-        background:#fff;
-        overflow:hidden;
-        border-radius:3px;
+        position: relative;
+        width: 600px;
+        height: 300px;
+        background: #fff;
+        overflow: hidden;
+        border-radius: 3px;
 
         .inner {
             display: none;
@@ -22,12 +22,11 @@
             left: 50%;
             transform: translate(-50%, 50%);
             background-image: 
-                linear-gradient(-30deg, transparent 0%, transparent 50%, #209F85 50%, #209F85 100%),
-                linear-gradient(45deg, #E3724D 0%, #E3724D 50%, #E38362 50%, #E38362 100%);
+                linear-gradient(0deg, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%);
             border-radius: 50%;
 
             &.rotate {
-                transform: translate(-50%, 50%) rotateZ(135deg);
+                transform: translate(-50%, 50%) rotateZ(179deg);
                 transition: 1s transform linear;
             }
             

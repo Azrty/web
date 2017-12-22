@@ -55,11 +55,12 @@ class PurchasesView extends Component {
       elmts[index].style.backgroundColor = `rgb(${color[index].r}, ${color[index].g}, ${color[index].b})`
       elmts[index].style.boxShadow = `0px 8px 20px 5px rgba(${color[index].r}, ${color[index].g}, ${color[index].b}, 0.5) `
       elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
-      elmts[index].style.color = (coef > 125) ? '#303133' : '#E4E4E4'
     }
     let inner = document.getElementsByClassName('inner')
     if (inner.length === 0) return
     for (let index = 0; index < inner.length; index++) {
+      inner[index].style.backgroundImage = `linear-gradient(0deg, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%),
+                linear-gradient(${180 / 100 * this.state.stats.users[index].pourcentage}deg, red 0%, red 50%, blue 50%, blue 100%)`
       setTimeout(() => {
         inner[index].classList.add('rotate')
       }, (index + 0.5) * 1000)

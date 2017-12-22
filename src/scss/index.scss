@@ -1,14 +1,18 @@
 $blue: #409EFF;
+$bg-color: #FEFEFE;
+$font-color: #303133;
 
 :root {
+    --bg-color: $bg-color;
     --blue: $blue;
+    --font-color: $font-color;
 }
 
 * {
     box-sizing: border-box;
     outline: none;
     scroll-behavior: smooth;
-    color: #303133;
+    color: var(--font-color);
 }
 
 ::-webkit-scrollbar-track {
@@ -30,6 +34,7 @@ html, body, #root, #root-container {
     height: 100%;
     font-family: 'Lato', sans-serif!important;
     font-size: 1rem;
+    background-color: var(--bg-color);
 }
 
 #root-container {
