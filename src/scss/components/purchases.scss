@@ -8,8 +8,9 @@
 
     .graph {
         position: relative;
-        width: 600px;
-        height: 300px;
+        margin-bottom: 10px;
+        width: 350px;
+        height: calc(350px / 2);
         background: #fff;
         overflow: hidden;
         border-radius: 3px;
@@ -25,7 +26,7 @@
             border-radius: 50%;
 
             &.rotate {
-                transform: translate(-50%, 50%) rotateZ(179deg);
+                transform: translate(-50%, 50%) rotateZ(179.4deg);
                 transition: 1s transform linear;
             }
             
@@ -40,6 +41,7 @@
                 border-radius: 100%;
             }
         }
+        
         $count: 10;
         $size: 100 / $count * 1%;
         @for $i from 0 through $count {

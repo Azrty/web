@@ -133,7 +133,7 @@ class FSSettings extends Component {
       mail: this.state.ownerMail
     }).then(res => {
       if (res.data.success === true) {
-        store.notif.add('Owner deleted!', 'success')
+        store.notif.add('User deleted!', 'success')
         target.parentNode.removeChild(target)
       } else {
         store.notif.add(res.data.error, 'error')
