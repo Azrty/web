@@ -25,12 +25,12 @@ class ShowFS extends Component {
       <div id='fs-show'>
         {store.flatSharing.flatSharings.length === 0
           ? (
-            <div>
+            <React.Fragment>
               <p>{emojify('No flatsharing :cry:', options)}</p>
               <button className='primary-btn' onClick={() => {
                 this.props.history.push('/flatsharing/create')
               }}>Create one</button>
-            </div>
+            </React.Fragment>
           ) : (
             <div>
               <div className='fs-container'>
