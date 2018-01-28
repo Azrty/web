@@ -21,7 +21,7 @@ class PurchasesView extends Component {
   }
 
   componentWillMount () {
-    flatSharing().get(`/flatSharing/${this.props.match.params.flatSharingId}/purchases/stats`)
+    flatSharing().get(`/flatSharing/${this.props.match.params.fsId}/purchases/stats`)
     .then(res => {
       this.setState({ loading: false })
       if (res.data.success === true) {
@@ -125,7 +125,7 @@ class PurchasesView extends Component {
         )
         )}
         <button className='primary-btn' onClick={
-          () => this.props.history.push(`/flatsharing/${this.props.match.params.flatSharingId}/purchases/add`)
+          () => this.props.history.push(`/flatsharing/${this.props.match.params.fsId}/purchases/add`)
         }>Add purchases</button>
       </div>
     )

@@ -22,7 +22,7 @@ class Add extends Component {
   }
 
   componentWillMount () {
-    store.flatSharing.getFlatSharing(this.props.match.params.flatSharingId)
+    store.flatSharing.getFlatSharing(this.props.match.params.fsId)
   }
 
   handleChange (e, val) {
@@ -41,11 +41,11 @@ class Add extends Component {
       amount: parseFloat(this.state.amount),
       buyer: buyer,
       desc: this.state.desc,
-      flatSharing: this.props.match.params.flatSharingId
+      flatSharing: this.props.match.params.fsId
     }).then(res => {
       if (res.data.success === true) {
         store.notif.add('Purchase added!', 'success')
-        this.props.history.push(`/flatsharing/${this.props.match.params.flatSharingId}/purchases`)
+        this.props.history.push(`/flatsharing/${this.props.match.params.fsId}/purchases`)
       }
     }).catch(err => {
       if (err.response) {
