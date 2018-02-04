@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "REACT_APP_API_AUTH=http://localhost:3005 REACT_APP_API_COLOC=http://localhost:3006 node scripts/start.js",
-    "build": "REACT_APP_API_AUTH=http://api/flatsharing.io/auth/ REACT_APP_API_COLOC=http://api.flatsharing.io/coloc/ node scripts/build.js",
+    "build": "REACT_APP_API_AUTH=https://api.flatsharing.io/auth/ REACT_APP_API_COLOC=https://api.flatsharing.io/coloc/ node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
