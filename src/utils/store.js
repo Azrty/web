@@ -30,8 +30,8 @@ class UserStore {
   @observable user = {}
 
   @action logState (state) {
-    this.isLogged = state
     auth().get('/me').then(res => {
+      this.isLogged = state
       this.user = res.data.user
     }).catch(err => {
       if (err.response) {

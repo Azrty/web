@@ -19,11 +19,11 @@ import Notification from './components/notification'
 /**
  * Flatsharing routes
  */
-import FSShow from './routes/flatSharing/show'
-import FSAdd from './routes/flatSharing/add'
-import FSSettings from './routes/flatSharing/settings'
-import PShow from './routes/purchases/show'
-import PAdd from './routes/purchases/add'
+import FlatSharingShow from './routes/flatSharing/show'
+import FlatSharingCreate from './routes/flatSharing/add'
+import FlatSharingSettings from './routes/flatSharing/settings'
+import PurchasesShow from './routes/purchases/show'
+import PurchasesCreate from './routes/purchases/add'
 
 import 'react-select/dist/react-select.css';
 import './scss/index.scss'
@@ -49,11 +49,11 @@ class Index extends React.Component {
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/flatsharing' component={FSShow} />
-            <Route exact path='/flatsharing/create' component={FSAdd} />
-            <Route exact path='/flatsharing/:id/settings' component={FSSettings} />
-            <Route exact path='/flatsharing/:fsId/purchases' component={PShow} />
-            <Route exact path='/flatsharing/:fsId/purchases/add' component={PAdd} />
+            <Route exact path='/flatsharing' component={FlatSharingShow} />
+            <Route exact path='/flatsharing/create' component={FlatSharingCreate} />
+            <Route exact path='/flatsharing/:id/settings' component={FlatSharingSettings} />
+            <Route exact path='/flatsharing/:fsId/purchases' component={PurchasesShow} />
+            <Route exact path='/flatsharing/:fsId/purchases/add' component={PurchasesCreate} />
             <Route exact path='/settings' component={Settings} />
             {store.user.isLogged
             ? <Redirect to='/flatsharing' />
