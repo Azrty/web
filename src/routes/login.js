@@ -28,7 +28,7 @@ class Login extends Component {
       if (res.data.success === true) {
         global.localStorage.setItem('token', res.data.token)
         store.user.logState(true)
-        this.props.history.push('/home')
+        this.props.history.push('/flatsharing')
       } else {
         store.notif.add(res.data.error, 'error')
       }

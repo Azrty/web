@@ -33,8 +33,8 @@ class Index extends React.Component {
   componentWillMount () {
     if (global.localStorage.getItem('token')) store.user.logState(true)
     if (global.localStorage.getItem('token') &&
-    (this.props.location.pathname.indexOf('login') !== -1 &&
-    this.props.location.pathname.indexOf('register') !== -1)) this.props.history.push('/home')
+    (this.props.location.pathname.indexOf('login') !== -1 ||
+    this.props.location.pathname.indexOf('register') !== -1)) this.props.history.push('/flatsharing')
     else if (!global.localStorage.getItem('token') &&
     this.props.location.pathname.indexOf('login') === -1 &&
     this.props.location.pathname.indexOf('register') === -1) this.props.history.push('/login')

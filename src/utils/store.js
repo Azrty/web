@@ -34,6 +34,7 @@ class UserStore {
       this.isLogged = state
       this.user = res.data.user
     }).catch(err => {
+      this.isLogged = false
       if (err.response) {
         global.localStorage.removeItem('token')
       }
