@@ -151,10 +151,22 @@ class FSSettings extends Component {
     return (
       <div id='fs-settings'>
         <form className='changeName' onSubmit={this.changeName.bind(this)}>
-          <label>Name:
+          <label>Flatsharing name :
             <input className='primary-input' type='text' name='name' placeholder={this.state.fs.name} value={this.state.name} onChange={this.handleChange} />
           </label>
           <button className='primary-btn' >Change</button>
+        </form>
+        <form className='addOwner' onSubmit={this.addOwner.bind(this)}>
+          <label>Add owner :
+            <input className='primary-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
+          </label>
+          <button className='primary-btn' >Add</button>
+        </form>
+        <form className='addUser' onSubmit={this.addUser.bind(this)}>
+          <label>Add User :
+            <input className='primary-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
+          </label>
+          <button type='submit' className='primary-btn' >Add</button>
         </form>
         <div className='owners'>
           <p>Owners:</p>
@@ -164,12 +176,6 @@ class FSSettings extends Component {
           })
           : null}
         </div>
-        <form className='addOwner' onSubmit={this.addOwner.bind(this)}>
-          <label>Add
-            <input className='primary-input' type='email' name='ownerMail' placeholder='Mail' value={this.state.ownerMail} onChange={this.handleChange} />
-          </label>
-          <button className='primary-btn' >Add</button>
-        </form>
         <div className='users'>
           <p>Users:</p>
           {this.state.fs.users
@@ -178,12 +184,6 @@ class FSSettings extends Component {
             })
           : null}
         </div>
-        <form className='addUser' onSubmit={this.addUser.bind(this)}>
-          <label>Add
-            <input className='primary-input' type='email' name='userMail' placeholder='Mail' value={this.state.userMail} onChange={this.handleChange} />
-          </label>
-          <button type='submit' className='primary-btn' >Add</button>
-        </form>
       </div>
     )
   }
